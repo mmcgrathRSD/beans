@@ -1,0 +1,69 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "This file is @generated automatically"
+    ],
+    "content-hash": "49140c219d6fd4f5d9a624ca693a7f57",
+    "packages": [
+        {
+            "name": "xobotyi/beansclient",
+            "version": "v1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/xobotyi/beansclient.git",
+                "reference": "672c751611807156c1c466ebf5c4db0990fbf426"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/xobotyi/beansclient/zipball/672c751611807156c1c466ebf5c4db0990fbf426",
+                "reference": "672c751611807156c1c466ebf5c4db0990fbf426",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "ext-mbstring": "*",
+                "php": ">=7.1"
+            },
+            "require-dev": {
+                "codacy/coverage": "^1.0.0",
+                "phpunit/phpunit": "^7.0.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "xobotyi\\beansclient\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Anton Zinovyev",
+                    "email": "xog3@yandex.ru",
+                    "role": "Developer"
+                }
+            ],
+            "description": "PHP7.1+ client for beanstalkd work queue with no dependencies",
+            "homepage": "https://github.com/xobotyi/beansclient",
+            "keywords": [
+                "beanstalk",
+                "beanstalkd",
+                "client",
+                "php",
+                "queue"
+            ],
+            "time": "2019-06-04T09:06:04+00:00"
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "stable",
+    "stability-flags": [],
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": [],
+    "platform-dev": []
+}
