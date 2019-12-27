@@ -3,14 +3,13 @@
 require "./vendor/autoload.php";
 
 use Popcorn\Beans\Consumer;
+use Popcorn\Beans\Payload;
+use Popcorn\Beans\Producer;
 use xobotyi\beansclient\Connection;
 
 //Connection to be passed to both types
 $connection = new Connection('127.0.0.1', 11300, 2, true);
 
 //Make a consumer
-$consumer = new Consumer($connection);
-
-$jobs = $consumer->getJobs('myTube');
-echo 'Hello';
-print_r($jobs);
+$producer = new Producer($connection);
+$job = $producer->useTube('myTube')->put(new Payload([1, 2, 3, 4]));

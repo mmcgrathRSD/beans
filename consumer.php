@@ -24,6 +24,9 @@ while (true) {
 		$job = $consumer->watchTube('myTube')->reserve();
 
 		echo "JobID: {$job->id} \n";
+		echo "Job Payload \n";
+		echo $job->payload;
+		echo "\n";
 		echo "Deleting Job.. \n";
 		$job->delete();
 	}
