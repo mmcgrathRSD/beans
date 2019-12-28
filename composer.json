@@ -10,7 +10,8 @@
         }
     ],
     "require": {
-        "xobotyi/beansclient": "^1.0"
+        "xobotyi/beansclient": "^1.0",
+        "mongodb/mongodb": "^1.5"
     },
     "autoload": {
         "psr-4": {
