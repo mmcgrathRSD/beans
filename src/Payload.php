@@ -20,7 +20,13 @@ class Payload implements JsonSerializable
 	}
 
 	//Todo: implement adding custom or default metadata for job payload
-	public function with()
+	/**
+	 * Add meta data to the payload
+	 *
+	 * @param array $meta
+	 * @return array
+	 */
+	public function with(array $meta = [])
 	{
 		return [
 			"metadata" => [

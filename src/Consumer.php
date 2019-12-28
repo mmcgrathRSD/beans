@@ -17,8 +17,13 @@ class Consumer extends BeansClient
 		parent::__construct($connection, new JsonSerializer());
 	}
 
-	//This function normalizes the output of the statstube command
-	public function getJobs($tubeName)
+	/**
+	 * Get normalized information about a job
+	 *
+	 * @param string $tubeName
+	 * @return mixed|array
+	 */
+	public function getJobs($tubeName): array
 	{
 		if (is_array($this->statsTube($tubeName))) {
 			return [
@@ -30,5 +35,20 @@ class Consumer extends BeansClient
 			'jobs' 			=> 0,
 			'jobs-ready' 	=> 0,
 		];
+	}
+
+	/**
+	 * Get normalized information about a job
+	 *
+	 * @param string $tubeName
+	 * @return mixed|array
+	 */
+	public function countJobs($tubeName): int
+	{
+		if (is_array($this->statsTube($tubeName))) {
+			return (int) $this->statsTube($tubeName)['current-jobs-ready'];
+		}
+
+		return 0;
 	}
 }

@@ -1,6 +1,6 @@
 <?php
 
-require "./vendor/autoload.php";
+require dirname(__DIR__) . '/vendor/autoload.php';
 
 use Popcorn\Beans\Consumer;
 use xobotyi\beansclient\Connection;
@@ -11,21 +11,16 @@ $connection = new Connection('127.0.0.1', 11300, 2, true);
 //Make a consumer
 $consumer = new Consumer($connection);
 
-
+//Change this to whatever you like, timer, cron etc..
 while (true) {
-	//Creats a stats tube object, which contains various info about the current jobs (if any)
-	$stats = $consumer->statsTube('myTube');
 
 	//Check to see if the current jobs is set, and has a value
-	if (
-		isset($stats['current-jobs-ready']) &&
-		(int) $stats['current-jobs-ready'] > 0
-	) {
+	if ($consumer->countJobs('myTube') >= 1) {
 		$job = $consumer->watchTube('myTube')->reserve();
 
 		echo "JobID: {$job->id} \n";
 		echo "Job Payload \n";
-		echo $job->payload;
+		echo json_encode($job->payload);
 		echo "\n";
 		echo "Deleting Job.. \n";
 		$job->delete();
