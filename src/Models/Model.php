@@ -1,10 +1,10 @@
 <?php
 
-namespace Popcorn\Beans;
+namespace Popcorn\Beans\Models;
 
 use MongoDB\Client as MongoClient;
 
-class Task
+class Model
 {
 	protected $database;
 	protected $collectionName;

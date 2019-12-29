@@ -2,7 +2,7 @@
 
 require "./vendor/autoload.php";
 
-use Popcorn\Beans\Task;
+use Popcorn\Beans\Models\QueueTask;
 use Popcorn\Beans\Payload;
 use Popcorn\Beans\Consumer;
 use Popcorn\Beans\Producer;
@@ -18,13 +18,36 @@ $connection = new Connection('127.0.0.1', 11300, 2, true);
 
 
 //--Producer Example
-// $producer = new Producer($connection, 'myTube');
-// $job = $producer->put(new Payload([1, 2, 3, 4]));
+$producer = new Producer($connection, 'myTube');
+$job = $producer->put(new Payload(['payload_key' => 'payload_val']));
 
-// var_dump($producer->statsTube('myTube'));
+
 $config = [
 	'database' => 'rally-local',
 ];
 
-$product = new Product($config);
-var_dump($product->count());
+$product = (new Product($config))->findOne([
+	'_id' => new MongoDB\BSON\ObjectId('55ae5452caae525c138b48e7'),
+]);
+
+$queueTask = new QueueTask($config);
+
+$insertOneResult = $queueTask->insertOne([
+	'created' => [
+		'time' => time(),
+	],
+	'title' => '',
+	'task' => '\Search\Models\Algolia\BoomiOrders::syncMyOrders',
+	'batch' => 'testing',
+	'sales_channel' => 'rally-sport-use',
+	'arguments' => [
+		'product_id' => $product->_id,
+	],
+]);
+
+var_dump($insertOneResult);
+
+// var_dump($producer->statsTube('myTube'));
+
+// $product = new Product($config);
+// var_dump($product->count());
