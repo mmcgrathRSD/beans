@@ -41,7 +41,7 @@ class Payload implements JsonSerializable
 	{
 		return [
 			"metadata" => [
-				"key1" => "val1",
+				"time" => time(),
 			],
 		];
 	}

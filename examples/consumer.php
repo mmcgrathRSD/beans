@@ -5,6 +5,9 @@ require dirname(__DIR__) . '/vendor/autoload.php';
 use Popcorn\Beans\Consumer;
 use xobotyi\beansclient\Connection;
 
+//Create a tube for examples
+$tubeName = 'newTube';
+
 //Connection to be passed to both types
 $connection = new Connection('127.0.0.1', 11300, 2, true);
 
@@ -15,8 +18,8 @@ $consumer = new Consumer($connection);
 while (true) {
 
 	//Check to see if the current jobs is set, and has a value
-	if ($consumer->countJobs('myTube') >= 1) {
-		$job = $consumer->watchTube('myTube')->reserve();
+	if ($consumer->countJobs($tubeName) >= 1) {
+		$job = $consumer->watchTube($tubeName)->reserve();
 
 		echo "JobID: {$job->id} \n";
 		echo "Job Payload \n";
@@ -24,5 +27,10 @@ while (true) {
 		echo "\n";
 		echo "Deleting Job.. \n";
 		$job->delete();
+	} else {
+		echo 'No Jobs!';
 	}
+
+	sleep(10);
+	echo "\n";
 }

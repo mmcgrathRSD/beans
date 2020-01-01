@@ -13,39 +13,38 @@ use xobotyi\beansclient\Connection;
 $connection = new Connection('127.0.0.1', 11300, 2, true);
 
 //--Consumer Example
-// $consumer = new Consumer($connection);
-// echo gettype($consumer->countJobs('myTube'));
-
-
+$consumer = new Consumer($connection, 'newTube');
+$newTasks = $consumer->checkForTasks();
+$consumer->process($newTasks);
 //--Producer Example
-$producer = new Producer($connection, 'myTube');
-$job = $producer->put(new Payload(['payload_key' => 'payload_val']));
+// $producer = new Producer($connection, 'myTube');
+// $job = $producer->put(new Payload(['payload_key' => 'payload_val']));
 
 
-$config = [
-	'database' => 'rally-local',
-];
+// $config = [
+// 	'database' => 'rally-local',
+// ];
 
-$product = (new Product($config))->findOne([
-	'_id' => new MongoDB\BSON\ObjectId('55ae5452caae525c138b48e7'),
-]);
+// $product = (new Product($config))->findOne([
+// 	'_id' => new MongoDB\BSON\ObjectId('55ae5452caae525c138b48e7'),
+// ]);
 
-$queueTask = new QueueTask($config);
+// $queueTask = new QueueTask($config);
 
-$insertOneResult = $queueTask->insertOne([
-	'created' => [
-		'time' => time(),
-	],
-	'title' => '',
-	'task' => '\Search\Models\Algolia\BoomiOrders::syncMyOrders',
-	'batch' => 'testing',
-	'sales_channel' => 'rally-sport-use',
-	'arguments' => [
-		'product_id' => $product->_id,
-	],
-]);
+// $insertOneResult = $queueTask->insertOne([
+// 	'created' => [
+// 		'time' => time(),
+// 	],
+// 	'title' => '',
+// 	'task' => '\Search\Models\Algolia\BoomiOrders::syncMyOrders',
+// 	'batch' => 'testing',
+// 	'sales_channel' => 'rally-sport-use',
+// 	'arguments' => [
+// 		'product_id' => $product->_id,
+// 	],
+// ]);
 
-var_dump($insertOneResult);
+// var_dump($insertOneResult);
 
 // var_dump($producer->statsTube('myTube'));
 
