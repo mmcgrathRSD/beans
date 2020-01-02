@@ -9,12 +9,6 @@ use Popcorn\Beans\Producer;
 use Popcorn\Beans\Models\Product;
 use xobotyi\beansclient\Connection;
 
-$config = [
-	'database' => 'rally-local',
-];
-$queueTask = new QueueTask($config);
-
-
 //Beans Client Connection Object
 $connection = new Connection('127.0.0.1', 11300, 2, true);
 $producer = new Producer($connection, 'myTube');
@@ -25,7 +19,7 @@ $producer->createMongoRecord(
 	[$id],
 	[
 		'title'      => 'Making Algolia Sync Item For ' . $id,
-		'archive'    => false,
+		'archive'    => false, //todo implement this
 		'batch'      => 'algolia',
 		'identifier' => 'algoliasync',
 	]
