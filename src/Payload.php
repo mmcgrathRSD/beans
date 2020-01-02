@@ -13,21 +13,10 @@ class Payload implements JsonSerializable
 		$this->array = $array;
 	}
 
-	//Todo: implement array merging metadata via with method
+
 	public function jsonSerialize()
 	{
 		return array_merge($this->array, $this->with());
-	}
-
-	public function toArray()
-	{
-		return [
-			'_id' => new \MongoDB\BSON\ObjectID,
-			'params' => [
-				'product_id' => $this->array[0]['_id'],
-			],
-			'task' => 'Some\Namespaced\Task::callIt'
-		];
 	}
 
 	//Todo: implement adding custom or default metadata for job payload

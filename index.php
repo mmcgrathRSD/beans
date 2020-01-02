@@ -9,21 +9,35 @@ use Popcorn\Beans\Producer;
 use Popcorn\Beans\Models\Product;
 use xobotyi\beansclient\Connection;
 
+$config = [
+	'database' => 'rally-local',
+];
+$queueTask = new QueueTask($config);
+
+
 //Beans Client Connection Object
 $connection = new Connection('127.0.0.1', 11300, 2, true);
+$producer = new Producer($connection, 'myTube');
+$id = '5e010095f55e155dac0c85bd';
+
+$producer->createMongoRecord(
+	'\Search\Models\Algolia\BoomiOrders::syncMyOrders',
+	[$id],
+	[
+		'title'      => 'Making Algolia Sync Item For ' . $id,
+		'archive'    => false,
+		'batch'      => 'algolia',
+		'identifier' => 'algoliasync',
+	]
+);
 
 //--Consumer Example
-$consumer = new Consumer($connection, 'newTube');
-$newTasks = $consumer->checkForTasks();
-$consumer->process($newTasks);
+// $consumer = new Consumer($connection, 'newTube');
+// $newTasks = $consumer->checkForTasks();
+// $consumer->process($newTasks);
 //--Producer Example
 // $producer = new Producer($connection, 'myTube');
 // $job = $producer->put(new Payload(['payload_key' => 'payload_val']));
-
-
-// $config = [
-// 	'database' => 'rally-local',
-// ];
 
 // $product = (new Product($config))->findOne([
 // 	'_id' => new MongoDB\BSON\ObjectId('55ae5452caae525c138b48e7'),
