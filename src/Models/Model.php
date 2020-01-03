@@ -41,7 +41,7 @@ class Model
 		if (method_exists('MongoDB\Collection', $function)) {
 			return call_user_func_array(
 				[
-					(new MongoClient("mongodb://localhost:27017"))->{$this->database}->{$this->collectionName},
+					(new MongoClient("mongodb://{$this->host}:27017"))->{$this->database}->{$this->collectionName},
 					$function,
 				],
 				$arguments
