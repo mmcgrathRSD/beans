@@ -7,6 +7,7 @@ use MongoDB\Client as MongoClient;
 class Model
 {
 	protected $database;
+	protected $host;
 	protected $collectionName;
 
 	/**
@@ -19,8 +20,12 @@ class Model
 	{
 		if (isset($config['database'])) {
 			$this->database = $config['database'];
+		}
+
+		if (isset($config['host'])) {
+			$this->host = $config['host'];
 		} else {
-			$this->database = 'localhost';
+			$this->host = 'localhost';
 		}
 	}
 
