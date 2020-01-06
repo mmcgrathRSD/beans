@@ -3,9 +3,12 @@
 namespace Popcorn\Beans\Models;
 
 use MongoDB\Client as MongoClient;
+use Popcorn\Beans\Traits\MetaStampable;
 
 class Model
 {
+	use MetaStampable;
+
 	protected $database;
 	protected $host;
 	protected $collectionName;
@@ -27,6 +30,14 @@ class Model
 		} else {
 			$this->host = 'localhost';
 		}
+
+		if (isset($config['username']) && isset($config['password'])) {
+			$this->username = $config['username'];
+			$this->password = $config['password'];
+		} else {
+			$this->username = null;
+			$this->password = null;
+		}
 	}
 
 	/**
@@ -43,7 +54,7 @@ class Model
 				[
 					(new MongoClient(
 						"mongodb://{$this->host}/",
-						['username' => 'mongoadmin', 'password' => 'mongoadmin', 'ssl' => false, 'authSource' => 'admin'],
+						['username' => "{$this->username}", 'password' => "{$this->password}", 'ssl' => false, 'authSource' => 'admin'],
 					))->{$this->database}->{$this->collectionName},
 					$function,
 				],
