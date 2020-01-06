@@ -9,6 +9,7 @@ See producer.php for a sample producer implementation.
 To create a producer, you must first instanciate an instance of a beanstalk connection.
 
 ```php
+
 <?php
 //Bring in the connection
 use xobotyi\beansclient\Connection;
@@ -34,6 +35,7 @@ $producer = new Producer($connection, 'myTube');
 //--3. Create a job with the producer
 
 $job = $producer->put(new Payload(['payload_key' => 'payload_val']));
+
 ?>
 ```
 
