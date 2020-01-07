@@ -6,7 +6,7 @@ use Popcorn\Beans\Consumer;
 use xobotyi\beansclient\Connection;
 
 //Create a tube for examples
-$tubeName = 'newTube';
+$tubeName = 'myTube';
 
 //Connection to be passed to both types
 $connection = new Connection('127.0.0.1', 11300, 2, true);

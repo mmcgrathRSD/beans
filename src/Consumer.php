@@ -73,7 +73,12 @@ class Consumer extends BeansClient
 	public function checkForTasks()
 	{
 		$tasks = [];
-		$newTasks = (new QueueTask(['database' => 'rally-local']))->find();
+		$newTasks = (new QueueTask([
+			'host' 		=> '44.231.178.201',
+			'database' 	=> 'rally-local',
+			'username' 	=> 'admin',
+			'password' 	=> 'admin123',
+		]))->find();
 
 		foreach ($newTasks as $task) {
 			$tasks[] = $task;

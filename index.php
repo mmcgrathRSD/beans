@@ -11,19 +11,8 @@ use xobotyi\beansclient\Connection;
 
 //Beans Client Connection Object
 $connection = new Connection('127.0.0.1', 11300, 2, true);
-$producer = new Producer($connection, 'myTube');
-$id = '5e010095f55e155dac0c85bd';
-
-$producer->createMongoRecord(
-	'\Search\Models\Algolia\BoomiOrders::syncMyOrders',
-	[$id],
-	[
-		'title'      => 'Making Algolia Sync Item For ' . $id,
-		'archive'    => false, //todo implement this
-		'batch'      => 'algolia',
-		'identifier' => 'algoliasync',
-	]
-);
+$consumer = new Consumer($connection, 'newTube');
+$newTasks = $consumer->checkForTasks();
 
 //--Consumer Example
 // $consumer = new Consumer($connection, 'newTube');
