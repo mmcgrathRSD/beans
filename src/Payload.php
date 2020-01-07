@@ -16,7 +16,13 @@ class Payload implements JsonSerializable
 
 	public function jsonSerialize()
 	{
-		return array_merge($this->array, $this->with());
+		$payload = [
+			'title' => $this->array['title'],
+			'parameters' => $this->array['parameters'],
+			'sales_channel' => $this->array['sales_channel'],
+		];
+
+		return array_merge($payload, $this->with());
 	}
 
 	//Todo: implement adding custom or default metadata for job payload
@@ -30,7 +36,8 @@ class Payload implements JsonSerializable
 	{
 		return [
 			"metadata" => [
-				"time" => time(),
+				"current_time" => time(),
+				"task_created" => $this->array['created'],
 			],
 		];
 	}
